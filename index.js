@@ -91,39 +91,80 @@ const internQs = [
   },
 ];
 
-let managerObjs = [];
-let engineerObjs = [];
-let internObjs = [];
+let managerArr = [];
+let engineerArr = [];
+let internArr = [];
+
+let managerClassObjs = [];
+let engineerClassObjs = [];
+let internClassObjs = [];
+
+//function to make classes with array objects^^
+function objectMaker() {
+  managerArr.forEach((person) => {
+    let manager = new Manager(
+      person.name,
+      person.id,
+      person.email,
+      person.title,
+      person.officeNum
+    );
+    managerClassObjs.push(manager);
+  });
+  engineerArr.forEach((person) => {
+    let engineer = new Engineer(
+      person.name,
+      person.id,
+      person.email,
+      person.title,
+      person.github
+    );
+    engineerClassObjs.push(engineer);
+  });
+  internArr.forEach((person) => {
+    let intern = new Intern(
+      person.name,
+      person.id,
+      person.email,
+      person.title,
+      person.school
+    );
+    internClassObjs.push(intern);
+  });
+  console.log(managerClassObjs);
+  console.log(engineerClassObjs);
+  console.log(internClassObjs);
+}
 
 //called when create Engineer or Intern or Finish is selected
 function addOrFinish(data) {
-  //determine wether Manager/Engineer/Intern and then call correct class constructor
+  //determine wether Manager/Engineer/Intern and push data to approprite array
   if (data.officeNum) {
-    //push manager entry to managerObjs array
-    managerObjs.push({
+    //push manager entry to managerArr array
+    managerArr.push({
       name: data.name,
       title: "Manager",
-      ID: data.id,
-      Email: data.email,
-      OfficeNum: data.officeNum,
+      id: data.id,
+      email: data.email,
+      officeNum: data.officeNum,
     });
   }
   if (data.github) {
-    engineerObjs.push({
+    engineerArr.push({
       name: data.name,
       title: "Engineer",
-      ID: data.id,
-      Email: data.email,
-      Github: data.github,
+      id: data.id,
+      email: data.email,
+      github: data.github,
     });
   }
   if (data.school) {
-    internObjs.push({
+    internArr.push({
       name: data.name,
       title: "Intern",
-      ID: data.id,
-      Email: data.email,
-      School: data.school,
+      id: data.id,
+      email: data.email,
+      school: data.school,
     });
   }
   //bring up next question block or quit based on add Engineer/Intern or Finished with entries
@@ -138,7 +179,11 @@ function addOrFinish(data) {
     });
   }
   if (data.addOrFinish === "Finished with entries") {
-    console.log(managerObjs, engineerObjs, internObjs);
+    //call a function that takes array data, passes it to constructors and makes cards
+    // console.log(managerArr);
+    // console.log("First log when finished" + managerArr);
+    // console.log(`Temp literal ${managerArr}`);
+    objectMaker();
   }
 }
 
