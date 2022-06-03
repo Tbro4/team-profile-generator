@@ -1,8 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const Manager = require("./manager.js");
-const Engineer = require("./engineer.js");
-const Intern = require("./inter.js");
+const Employee = require("./lib/employee");
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
 
 const managerQs = [
   {
@@ -90,19 +91,40 @@ const internQs = [
   },
 ];
 
-let cardObjs = [];
+let managerObjs = [];
+let engineerObjs = [];
+let internObjs = [];
 
 //called when create Engineer or Intern or Finish is selected
 function addOrFinish(data) {
   //determine wether Manager/Engineer/Intern and then call correct class constructor
   if (data.officeNum) {
-    console.log("Manager");
+    //push manager entry to managerObjs array
+    managerObjs.push({
+      name: data.name,
+      title: "Manager",
+      ID: data.id,
+      Email: data.email,
+      OfficeNum: data.officeNum,
+    });
   }
   if (data.github) {
-    console.log("Engineer");
+    engineerObjs.push({
+      name: data.name,
+      title: "Engineer",
+      ID: data.id,
+      Email: data.email,
+      Github: data.github,
+    });
   }
   if (data.school) {
-    console.log("Intern");
+    internObjs.push({
+      name: data.name,
+      title: "Intern",
+      ID: data.id,
+      Email: data.email,
+      School: data.school,
+    });
   }
   //bring up next question block or quit based on add Engineer/Intern or Finished with entries
   if (data.addOrFinish === "Engineer") {
@@ -116,9 +138,7 @@ function addOrFinish(data) {
     });
   }
   if (data.addOrFinish === "Finished with entries") {
-    // inquirer.prompt(engineerQs).then((data) => {
-    //     console.log(data)
-    // })
+    console.log(managerObjs, engineerObjs, internObjs);
   }
 }
 
