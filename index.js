@@ -4,6 +4,7 @@ const Employee = require("./lib/employee");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
+const HTMLgenerator = require("./src/htmlGenerator");
 
 const managerQs = [
   {
@@ -99,7 +100,7 @@ let managerClassObjs = [];
 let engineerClassObjs = [];
 let internClassObjs = [];
 
-//function to make classes with array objects^^
+//function to make classes with array objects
 function objectMaker() {
   managerArr.forEach((person) => {
     let manager = new Manager(
@@ -179,17 +180,18 @@ function addOrFinish(data) {
     });
   }
   if (data.addOrFinish === "Finished with entries") {
-    //call a function that takes array data, passes it to constructors and makes cards
-    // console.log(managerArr);
-    // console.log("First log when finished" + managerArr);
-    // console.log(`Temp literal ${managerArr}`);
+    //objectMaker takes array data, passes is it to constructor objects to make new objects
     objectMaker();
   }
 }
 
+//starts command-line questions
 function init() {
   inquirer.prompt(managerQs).then((data) => {
     addOrFinish(data);
+    fs.writeFile("./dist/MyTeam.html", htmlGenerator(), (err) => {
+      err ? console.log(err) : console.log("File created!");
+    });
   });
 }
 
