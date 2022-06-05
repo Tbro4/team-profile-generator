@@ -4,7 +4,9 @@ const Employee = require("./lib/employee");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
-const HTMLgenerator = require("./src/htmlGenerator");
+const htmlGenerator = require("./src/htmlGenerator");
+
+let person;
 
 const managerQs = [
   {
@@ -100,6 +102,8 @@ let managerClassObjs = [];
 let engineerClassObjs = [];
 let internClassObjs = [];
 
+let employeeClassObjs = [];
+
 //function to make classes with array objects
 function objectMaker() {
   managerArr.forEach((person) => {
@@ -132,9 +136,6 @@ function objectMaker() {
     );
     internClassObjs.push(intern);
   });
-  console.log(managerClassObjs);
-  console.log(engineerClassObjs);
-  console.log(internClassObjs);
 }
 
 //called when create Engineer or Intern or Finish is selected
@@ -173,15 +174,16 @@ function addOrFinish(data) {
     inquirer.prompt(engineerQs).then((data) => {
       addOrFinish(data);
     });
-  }
-  if (data.addOrFinish === "Intern") {
+  } else if (data.addOrFinish === "Intern") {
     inquirer.prompt(internQs).then((data) => {
       addOrFinish(data);
     });
-  }
-  if (data.addOrFinish === "Finished with entries") {
+  } else {
     //objectMaker takes array data, passes is it to constructor objects to make new objects
     objectMaker();
+    fs.writeFile("./dist/MyTeam.html", htmlGenerator(), (err) => {
+      err ? console.log(err) : console.log("File created!");
+    });
   }
 }
 
@@ -189,10 +191,12 @@ function addOrFinish(data) {
 function init() {
   inquirer.prompt(managerQs).then((data) => {
     addOrFinish(data);
-    fs.writeFile("./dist/MyTeam.html", htmlGenerator(), (err) => {
-      err ? console.log(err) : console.log("File created!");
-    });
+    // console.log(employeeClassObjs);
   });
 }
 
 init();
+
+exports.manClass = managerClassObjs;
+exports.engClass = engineerClassObjs;
+exports.intClass = internClassObjs;
