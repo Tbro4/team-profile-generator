@@ -26,40 +26,32 @@ describe("Employee", () => {
     const employee = new Employee("name", 15, "email");
     let name;
 
-    //Act
     name = employee.getName();
 
-    //Assert
     expect(name).toEqual("name");
   });
   it("Can get id via getID()", () => {
     const employee = new Employee("name", 15, "email");
     let id;
 
-    //Act
     id = employee.getId();
 
-    //Assert
     expect(id).toEqual(15);
   });
   it("Can get email via getEmail()", () => {
     const employee = new Employee("name", 15, "email");
     let email;
 
-    //Act
     email = employee.getEmail();
 
-    //Assert
     expect(email).toEqual("email");
   });
   it("getRole() should return 'Employee'", () => {
     const employee = new Employee("name", 15, "email");
     let title;
 
-    //Act
     title = employee.getRole();
 
-    //Assert
     expect(title).toEqual("Employee");
   });
 });

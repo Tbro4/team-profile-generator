@@ -2,7 +2,6 @@ const index = require("../index");
 const managerHtmlGen = require("./htmlManTemp");
 const engineerHtmlGen = require("./htmlEngTemp");
 const internHtmlGen = require("./htmlIntTemp");
-const manager = require("./htmlManTemp");
 
 function htmlGenerator() {
   return `<!DOCTYPE html>
@@ -28,11 +27,12 @@ function htmlGenerator() {
     <title>My Team</title>
 </head>
 <body>
-    <header class="header">
+    <header class="header bg-primary text-center p-2 text-light">
         <h1 class="title">My Team</h1>
     </header>
     <main class ="main">
-
+<div class = "container m-4">
+<div class = "row justify-content-center">
 ${index.manClass.map((person) => {
   return managerHtmlGen(person);
 })}
@@ -42,7 +42,8 @@ ${index.engClass.map((person) => {
 ${index.intClass.map((person) => {
   return internHtmlGen(person);
 })}
-
+</div>
+</div>
     </main>
 
     <script

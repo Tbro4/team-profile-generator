@@ -10,20 +10,16 @@ describe("Intern", () => {
     const intern = new Intern("name", 15, "email", "title", 12);
     let title;
 
-    //Act
     title = intern.getRole();
 
-    //Assert
     expect(title).toEqual("Intern");
   });
   it("Can get school via getSchool()", () => {
     const intern = new Intern("name", 15, "email", "title", "School");
     let school;
 
-    //Act
     school = intern.getSchool();
 
-    //Assert
     expect(school).toEqual("School");
   });
 });

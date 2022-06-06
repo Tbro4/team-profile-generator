@@ -10,20 +10,16 @@ describe("Engineer", () => {
     const engineer = new Engineer("name", 15, "email", "title", 12);
     let title;
 
-    //Act
     title = engineer.getRole();
 
-    //Assert
     expect(title).toEqual("Engineer");
   });
   it("Can get GitHub username via getGithub()", () => {
     const engineer = new Engineer("name", 15, "email", "title", "Github");
     let github;
 
-    //Act
     github = engineer.getGithub();
 
-    //Assert
     expect(github).toEqual("Github");
   });
 });

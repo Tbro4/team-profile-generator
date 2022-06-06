@@ -1,12 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const Employee = require("./lib/employee");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const htmlGenerator = require("./src/htmlGenerator");
-
-let person;
 
 const managerQs = [
   {
@@ -102,8 +99,6 @@ let managerClassObjs = [];
 let engineerClassObjs = [];
 let internClassObjs = [];
 
-let employeeClassObjs = [];
-
 //function to make classes with array objects
 function objectMaker() {
   managerArr.forEach((person) => {
@@ -191,7 +186,6 @@ function addOrFinish(data) {
 function init() {
   inquirer.prompt(managerQs).then((data) => {
     addOrFinish(data);
-    // console.log(employeeClassObjs);
   });
 }
 
